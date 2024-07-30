@@ -81,7 +81,8 @@ def getRecommendations(similarities,name):
   
     # now pick the final 10 recs by sorting by weighted popularity
     top10 = topSongs.nlargest(10,'weightedPopularity')
-    print(top10[['name','artists','similarities','weightedPopularity','release_date']])
+
+    return top10
 
 # calculate weighted popularity given a release date of a song
 def getWeightedPopularity(releaseDate):
@@ -101,6 +102,7 @@ def getWeightedPopularity(releaseDate):
 # take the top 75 recommendations, and filter them by language (english and spanish only first)
 def filterByLanguage(recommendations):
 
+    '''
     results = []
 
     # i will use lyricsgenius to grab the lyrics for songs, then use langdetect to detect the language
@@ -119,30 +121,32 @@ def filterByLanguage(recommendations):
     
     # filter based on english/spanish
     recommendations = recommendations.query('lang=="es" or lang=="en"')
+    '''
+    return recommendations.query('lang=="es" or lang=="en"')
 
-    return recommendations
+def mainFunction(choice,songInput,main=False):
+    cover = ''      # album cover
 
-if __name__ == '__main__':
+    if choice == 'songEn':
 
-    # read in song and artist name
-    print('-----------------------------\n\tInput Options')
-    print('1. Song Name - Artist\n2. Spotify Playlist Link\n3. Spotify Song Link\n')
-    print('-----------------------------\n')
-    choice = int(input('Enter 1, 2, or 3: '))
-    if choice == 1:
-        songInput = input('\nEnter song title - artist name (e.g. Vampire - Dominic Fike): ')
-        # check input format
-        while not songInput.find('-'):
+        if main:
+            songInput = input('\nEnter song title - artist name (e.g. Vampire - Dominic Fike): ')
+            # check input format
+            while not songInput.find('-'):
 
-            print('invalid entry. please try again')
-            songInput = input('Enter song title - artist name (e.g. Vampire - Dominic Fike)')
+                print('invalid entry. please try again')
+                songInput = input('Enter song title - artist name (e.g. Vampire - Dominic Fike)')
         name, artist = songInput.split('-')
 
         # get all the matching features of this song similar to my data file
         songFeatures = cleanData.getTrackInfo(name.strip(),artist.strip())  
-        print(songFeatures)
-    elif choice == 2:
-        playlistID = input('Enter Spotify Playlist Link: ')
+
+    elif choice == 'playlist':
+
+        if main:
+            playlistID = input('Enter Spotify Playlist Link: ')
+        else:
+            playlistID = songInput
 
         # get songs from playlist to base off of
         trackIDs = cleanData.getTracksFromPlaylist(playlistID)
@@ -163,12 +167,15 @@ if __name__ == '__main__':
         songFeatures = pd.DataFrame([songFeatures])
         songFeatures.loc[0,'explicit'] = 1 if (songFeatures.loc[0,'explicit']>0.5) else 0
         name = ''
-    elif choice == 3:
-        songID = input('\nEnter Song Link: ')
+    elif choice == 'songLink':
+
+        if main:
+            songID = input('\nEnter Song Link: ')
+        else:
+            songID = songInput
         songFeatures = cleanData.getTrackInfo(uri=songID)
         name = songFeatures.loc[0,'name']
-
-        
+    
     songFeatures.loc[0,'explicit'] = 1 if (songFeatures.loc[0,'explicit']=='True') else 0
 
     # load data and extract features
@@ -178,4 +185,46 @@ if __name__ == '__main__':
     similarities = getSimilarity(musicData,songFeatures)
 
     # get final song recommendations
-    getRecommendations(similarities,name.strip())
+    return getRecommendations(similarities,name.strip())
+
+# get song name and artist formatted
+def getInfo(entry, songInfo):
+    name = ''
+    artist = ''
+
+    if entry=='songLink':
+        songFeatures = cleanData.getTrackInfo(uri=songInfo)
+        name = songFeatures.loc[0,'name']
+        artist = songFeatures.loc[0,'artists']
+    elif entry=='songEn':
+        name, artist = songInfo.split('-')
+
+    return (name, artist)
+
+# gets top 10 trending songs rn
+def trendingSongs():
+
+    artistList, topSongs = cleanData.getTrending()
+    return (artistList, topSongs)
+
+
+def getCover(song):
+
+    return cleanData.getCover(song)
+
+if __name__ == '__main__':
+
+    # read in song and artist name
+    print('-----------------------------\n\tInput Options')
+    print('1. Song Name - Artist\n2. Spotify Playlist Link\n3. Spotify Song Link\n')
+    print('-----------------------------\n')
+    choice = int(input('Enter 1, 2, or 3: '))
+
+    if choice == 1:
+        choice = 'songEn'
+    elif choice == 2:
+        choice = 'playlist'
+    else:
+        choice = 'songLink'
+
+    mainFunction(choice,main=True)

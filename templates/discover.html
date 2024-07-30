@@ -1,0 +1,56 @@
+{%extends 'index.html'%}
+{%block title%}Discover popular music now{%endblock%}
+{%block content%}
+    <body class="discover">
+        <h2>Trending Artists</h3>
+        <div class="trendingA">
+            <div class="column one">
+                <a href="{{urls[0]}}" target="_blank"><img src="{{artists[0]['cover']}}"></a>
+                <h6>{{artists[0]['name']}}</h6>
+                <a href="{{urls[1]}}" target="_blank"><img src="{{artists[1]['cover']}}"></a>
+                <h6>{{artists[1]['name']}}</h6>
+            </div>
+            <div class="column two">
+                <a href="{{urls[2]}}" target="_blank"><img src="{{artists[2]['cover']}}"></a>
+                <h6>{{artists[2]['name']}}</h6>
+                <a href="{{urls[3]}}" target="_blank"><img src="{{artists[3]['cover']}}"></a>
+                <h6>{{artists[3]['name']}}</h6>
+            </div>
+            <div class="column three">
+                <a href="{{urls[4]}}" target="_blank"><img src="{{artists[4]['cover']}}"></a>
+                <h6>{{artists[4]['name']}}</h6>
+                <a href="{{urls[5]}}" target="_blank"><img src="{{artists[5]['cover']}}"></a>
+                <h6>{{artists[5]['name']}}</h6>
+            </div>
+
+        </div>
+        <h2>Trending Songs</h3>
+        <div class="trendingS">
+            <div class="column one">
+                <h5>{{songs[0]['name']}}</h5>
+                <h6>{{songs[0]['artists']}}</h6>
+                <h5>{{songs[1]['name']}}</h5>
+                <h6>{{songs[1]['artists']}}</h6>
+                <h5>{{songs[2]['name']}}</h5>
+                <h6>{{songs[2]['artists']}}</h6>
+            </div>
+            <div class="column two">
+                <h5>{{songs[3]['name']}}</h5>
+                <h6>{{songs[3]['artists']}}</h6>
+                <h5>{{songs[4]['name']}}</h5>
+                <h6>{{songs[4]['artists']}}</h6>
+                <h5>{{songs[5]['name']}}</h5>
+                <h6>{{songs[5]['artists']}}</h6>
+            </div>
+            <div class="column three">
+                <h5>{{songs[6]['name']}}</h5>
+                <h6>by {{songs[6]['artists']}}</h6>
+                <h5>{{songs[7]['name']}}</h5>
+                <h6>by {{songs[7]['artists']}}</h6>
+                <h5>{{songs[8]['name']}}</h5>
+                <h6>by {{songs[8]['artists']}}</h6>
+            </div>
+        </div>
+
+    </body>
+{%endblock%}

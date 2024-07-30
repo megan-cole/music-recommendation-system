@@ -1,0 +1,43 @@
+{%extends 'index.html'%}
+{%block title%}Your Results{%endblock%}
+{%block content%}
+    <body class="results">
+        <div class="resultsOuter">
+            <div class="header">
+                <img src="{{cover}}">
+                <span class="info">
+                    {% if (name!= "") %}
+                    <h6>Songs Similar To:</h6>
+                    <h2>{{name}}</h2>
+                    <h5>by {{artist}}</h5>
+                    {%endif%}
+                </span>
+            </div>
+            <div class="recommendations">
+                <div class="column track">
+                    <h6 class="trackH">TRACK</h6>
+                    {% for rec in recs%}
+                    <i class="fa fa-play-circle fa-lg"></i>
+                    <p class="track-name">{{rec['name']}}</p>
+                    <br>
+                    {%endfor%}
+                </div>
+                <div class="column artist">
+                    <h6 class="artistH">ARTIST</h6>
+                    {% for rec in recs%}
+                    <p class="artist-name">{{rec['artists']}}</p>
+                    <br>
+                    {%endfor%}
+                </div>
+                <div class="column duration">
+                    <h6 class="durationH">DURATION</h6>
+                    {% for rec in recs%}
+                    <p class="dur">{{rec['duration_ms']}}</p>
+                    <br>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </body>
+
+{%endblock%}

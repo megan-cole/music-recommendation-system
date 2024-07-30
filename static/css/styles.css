@@ -1,0 +1,201 @@
+body {
+    background-color: rgba(18, 23, 57,0.9);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+
+    text-align: center;
+    border-radius:10px;
+
+}
+
+.main-info {
+    padding-top: 2vh;
+    text-align: center
+}
+.main-info #txt {
+    color: white;
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-shadow: 1px 1px 2px black;
+    padding-bottom: 1vh;
+}
+
+.main-info input[type=text] {
+    width: 50%;
+    padding: 20px 30px;
+    border-radius: 30px;
+    outline: none;
+    margin-bottom: 2vh;
+}
+
+.main-info input[type=text]:focus, input[type=submit]:focus {
+    border: 3px solid black;
+}
+
+::placeholder {
+
+    font-family: "Verdana";
+    font-size: 1.1rem;
+    opacity: 0.7;
+
+}
+
+
+.main-info input[type=submit] {
+    width: 30%;
+    padding: 5px 30px;
+    border-radius: 30px;
+    outline: none;
+    opacity: 0.9;
+    color: rgb(22, 29, 75);
+    font-family: "Verdana";
+    font-weight: bold;
+    white-space: normal;
+    margin-bottom: 10px;
+}
+
+.drop {
+    position: absolute;
+    padding-left: 25px;
+}
+
+
+.drop label{
+    color: white;
+    font-size: 2.5vh;
+
+}
+
+.drop input[type=radio] {
+    display: block;
+    border: 0px;
+    height: 0.1;
+}
+
+.err {
+
+    background-color: rgba(235,86,86,0.2);
+    border-radius: 5px;
+    font-size: 15px;
+    color: #EB5A4A;
+    width: 215px;
+    margin: auto;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+
+.header img {
+
+    width: 150px;
+    margin-left: 20%;
+    margin-top: -2vh;
+    margin-right: 10px;
+}
+
+.header .info {
+    color: white;
+    margin-top: -8px;
+    font-family: "Verdana";
+    margin-left: 10px;
+}
+
+.info h6{
+    margin-top: -5px;
+    margin-bottom: -1px;
+    font-size: 14px;
+
+}
+
+.info h2 {
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+}
+
+
+.recommendations, .trendingA, .trendingS {
+    margin-left: 10%;
+}
+
+
+.column {
+
+    float: left;
+    color: white;
+    font-size: 16px;
+    margin-top: 5vh;
+}
+
+.column h6 {
+    color: rgba(255, 255,255,0.4);
+}
+
+.track {
+    width: 50%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.artist {
+    width: 35%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.one {
+    width: 33%;
+
+}
+.two {
+    width: 33%;
+}
+.three {
+    width: 33%;
+}
+
+.duration {
+    width: 15%;
+}
+
+.recommendations i, .track-name, .artist-name, .dur {
+    display: inline-block;
+}
+
+.track-name {
+    margin-left: 10px;
+}
+
+.recInfo h6 {
+    display: inline-block;
+}
+
+.trendingA img {
+    width: 150px;
+}
+
+.trendingA {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.discover h2 {
+    text-align: center;
+    color: white
+}
+
+
+.trendingS {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
